@@ -196,11 +196,14 @@ function createWinLine(cells) {
     const length = Math.sqrt(dx * dx + dy * dy) + 14;
     const angle = Math.atan2(dy, dx);
 
+    const midX = (x1 + x2) / 2;
+    const midY = (y1 + y2) / 2;
+
     const line = document.createElement("div");
     line.className = "win-line";
     line.style.width = `${length}px`;
-    line.style.left = `${x1}px`;
-    line.style.top = `${y1}px`;
+    line.style.left = `${midX}px`;
+    line.style.top = `${midY}px`;
     line.style.transform = `translate(-50%, -50%) rotate(${angle}rad)`;
 
     winLineElement.appendChild(line);
