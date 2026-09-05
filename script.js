@@ -114,12 +114,12 @@ function checkWinner(row, col) {
 
 function getLine(row, col, rowDir, colDir) {
     const line = [[row, col]];
-    collectDirection(row, col, rowDir, colDir, line);
-    collectDirection(row, col, -rowDir, -colDir, line);
+    collectDirection(row, col, -rowDir, -colDir, line, true);
+    collectDirection(row, col, rowDir, colDir, line, false);
     return line;
 }
 
-function collectDirection(row, col, rowDir, colDir, line) {
+function collectDirection(row, col, rowDir, colDir, line, prepend) {
     let r = row + rowDir;
     let c = col + colDir;
 
@@ -130,7 +130,12 @@ function collectDirection(row, col, rowDir, colDir, line) {
         c < COLS &&
         board[r][c] === currentPlayer
     ) {
-        line.push([r, c]);
+        const cell = [r, c];
+        if (prepend) {
+            line.unshift(cell);
+        } else {
+            line.push(cell);
+        }
         r += rowDir;
         c += colDir;
     }
